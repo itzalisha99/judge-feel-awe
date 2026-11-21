@@ -31,6 +31,11 @@ def main() -> None:
     with open(out_path, "w", encoding="utf-8", newline="") as f:
         f.write(TEXT)
 
+    # Round-trip check: what landed on disk must be exactly the text.
+    with open(out_path, "r", encoding="utf-8", newline="") as f:
+        if f.read() != TEXT:
+            raise ValueError("entry.txt on disk does not match the entry text")
+
 
 if __name__ == "__main__":
     main()
